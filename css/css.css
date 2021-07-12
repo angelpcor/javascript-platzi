@@ -1,0 +1,105 @@
+
+.green {
+    background-color: green;
+}
+
+.big {
+    font-size: 300%;
+}
+
+.medium {
+    font-size: 150%;
+}
+
+.center {
+    text-align: center;
+}
+
+.header{
+    font-family: 'Overpass', sans-serif;
+    font-size: 4vw;
+    margin-top: 10vh;
+
+}
+
+.header-description {
+    font-family: 'Overpass', sans-serif;
+    font-size: 3vw;
+    text-align: center;
+}
+
+.centered-input {
+    display: block;
+    margin: 0 auto;
+    width: 20%;
+}
+
+.triangle-input {
+    display: block;
+    margin: 0 auto;
+    width: 10%;
+    margin-bottom: 1vh;
+}
+
+.btn {
+    width: 100%;
+}
+
+
+
+.button {
+    background-color:#44c767;
+    border-radius:28px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;color:#ffffff;
+    font-family:Arial;
+    font-size:2vh;
+    padding:2vw 2vh;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+    outline:none;
+}
+
+.button:hover {
+    background-color:#5cbf2a;
+    outline:none;
+}
+
+.button:active {
+    position:relative;
+    top:1px;
+    outline:none;
+}
+
+@media (max-width: 800px) {
+    .big {
+        font-size: 160%;
+    }
+
+    .header{
+        font-size: 10vw;
+        margin-top: 8vh;
+    }
+
+    .header-description{
+        font-size: 6vw;
+    }
+
+    .panel-default {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .medium {
+        font-size: 120%;
+    }
+
+    .centered-input {
+        width: 50%;
+    }
+
+    .triangle-input {
+        width: 30%;
+    }
+}
