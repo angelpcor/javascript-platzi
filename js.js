@@ -46,34 +46,88 @@ function calcDiscount(price, discount) {
 // Average
 
 let averageList = [];
+let orderedAverageList;
 let averageSum = 0;
 let formatedAverageElements = "Values: "
+const halfList = parseInt(averageList.length / 2);
 const averageInput = document.getElementById("average-input");
-function calcAverage() { return averageSum / (averageList.length / 2) }
+
+function isEven(a) {
+    if (a % 2 === 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function calcAverage() { return averageSum / averageList.length }
+function calcMedian() {
+    if (isEven(averageList.length)) {
+        const element1 = averageList[halfList];
+        const element2 = averageList[halfList + 1];
+        const median = (element1 + element2) / 2;
+
+        return median;
+    } else {
+        return averageList[(averageList.length - 1) / 2];
+    }
+}
+
+// These two functions are not made by me.
+function count(array, valorToCount) {
+    return array.filter((element) => element === valorToCount).length;
+}
+function calcMode(values) {
+    const [reps, mode] = values.reduce(
+        (acc, val) => {
+            const nn = count(values, val);
+            if (nn === acc[0] && acc[1].every((item) => item !== val)) {
+                acc[1].push(val);
+            } else if (nn > acc[0]) {
+                acc = [nn, [val]];
+            }
+            return acc;
+        },
+        [0, []]
+    );
+
+    return { reps, mode };
+}
+// -------------------- //
 
 let averageLabel = document.getElementById("average-items-label");
 let resultLabel = document.getElementById("average-result-label");
+let medianLabel = document.getElementById("median-result-label");
+let modeLabel = document.getElementById("mode-result-label");
 
+
+function clearAverage() {
+    resultLabel.innerHTML = `Average: 0`
+    averageLabel.innerHTML = "Values: ";
+    formatedAverageElements = "Values: ";
+    medianLabel.innerHTML = `Median: 0`
+    modeLabel.innerHTML = `Mode: 0`
+    averageList = [];
+    averageSum = 0;
+}
 
 function addValueToAverage() {
     const value = parseInt(averageInput.value)
-    averageList.push(value);
-    formatedAverageElements = formatedAverageElements + value + ", ";
+    if (value) {
+        averageList.push(value);
+        formatedAverageElements = formatedAverageElements + value + ", ";
 
-    calcAverage()
-    averageSum = averageSum + value;
-    resultLabel.innerHTML = `Average: ${calcAverage() ? calcAverage() : 0}`
-    averageLabel.innerHTML = formatedAverageElements;
+        calcAverage()
+        averageSum = averageSum + value;
+        resultLabel.innerHTML = `Average: ${calcAverage() ? calcAverage() : 0}`
+        medianLabel.innerHTML = `Median: ${calcMedian()}`
+        modeLabel.innerHTML = `Mode: ${calcMode(averageList) ? calcMode(averageList).mode : 0}`
+        averageLabel.innerHTML = formatedAverageElements;
 
-    averageInput.value = undefined;
+        orderedAverageList = averageList.sort(function (a, b) { return a - b; });
+        averageInput.value = NaN;
+    }
 }
-
-
-
-
-
-
-
 
 // Web functionality
 
@@ -158,7 +212,6 @@ for (discountInput of document.getElementsByClassName("discount-input")) {
 }
 averageInput.addEventListener("keydown", function onEvent(e) {
     if (e.key == "Enter") {
-        averageList.push(averageInput.value)
         addValueToAverage()
         return false;
     }
