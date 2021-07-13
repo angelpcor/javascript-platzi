@@ -63,8 +63,8 @@ function isEven(a) {
 function calcAverage() { return averageSum / averageList.length }
 function calcMedian() {
     if (isEven(averageList.length)) {
-        const element1 = averageList[halfList];
-        const element2 = averageList[halfList + 1];
+        const element1 = averageList[averageList.length / 2 - 1];
+        const element2 = averageList[averageList.length / 2];
         const median = (element1 + element2) / 2;
 
         return median;
@@ -73,7 +73,7 @@ function calcMedian() {
     }
 }
 
-// These two functions are not made by me.
+// These two functions are modified by me, but not made by me.
 function count(array, valorToCount) {
     return array.filter((element) => element === valorToCount).length;
 }
