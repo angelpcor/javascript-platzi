@@ -43,6 +43,37 @@ function calcDiscount(price, discount) {
     return discountedPrice;
 }
 
+// Average
+
+let averageList = [];
+let averageSum = 0;
+let formatedAverageElements = "Values: "
+const averageInput = document.getElementById("average-input");
+function calcAverage() { return averageSum / (averageList.length / 2) }
+
+let averageLabel = document.getElementById("average-items-label");
+let resultLabel = document.getElementById("average-result-label");
+
+
+function addValueToAverage() {
+    const value = parseInt(averageInput.value)
+    averageList.push(value);
+    formatedAverageElements = formatedAverageElements + value + ", ";
+
+    calcAverage()
+    averageSum = averageSum + value;
+    resultLabel.innerHTML = `Average: ${calcAverage() ? calcAverage() : 0}`
+    averageLabel.innerHTML = formatedAverageElements;
+
+    averageInput.value = undefined;
+}
+
+
+
+
+
+
+
 
 // Web functionality
 
@@ -125,6 +156,14 @@ for (discountInput of document.getElementsByClassName("discount-input")) {
         }
     });
 }
+averageInput.addEventListener("keydown", function onEvent(e) {
+    if (e.key == "Enter") {
+        averageList.push(averageInput.value)
+        addValueToAverage()
+        return false;
+    }
+});
+
 
 for (button of document.getElementsByClassName("btn")) {
     addEventListener('click', function (e) {
@@ -150,6 +189,12 @@ function disallowEnter2(e) {
 function disallowEnter3(e) {
     if (e.key == "Enter") {
         calcFinalDiscount();
+        return false;
+    }
+}
+
+function disallowEnter4(e) {
+    if (e.key == "Enter") {
         return false;
     }
 }
