@@ -31,7 +31,32 @@ function circleDiameter(radius) { return radius * 2 };
 function circlePerimeter(diameter) { return Math.floor(diameter * pi) };
 function circleArea(radius) { return Math.floor((circleRadius * circleRadius) * pi) };
 
+
+// Discounts
+let price = 100;
+let discount = 15;
+
+function calcDiscount(price, discount) {
+    let priceMinusDiscount = 100 - discount;
+    let discountedPrice = (price * priceMinusDiscount) / 100;
+
+    return discountedPrice;
+}
+
+
 // Web functionality
+
+function calcFinalDiscount() {
+    const input1 = document.getElementById("input-discount").value;
+    const input2 = document.getElementById("input-discount2").value;
+
+    const label = document.getElementById("discount-label");
+    if (input1 && input2) {
+        label.innerHTML = `Final price: ${calcDiscount(input1, input2)}`;
+    } else {
+        label.innerHTML = "You have to specify all the values!";
+    }
+}
 
 function calcCircle() {
     const input = document.getElementById("input-circle");
@@ -67,63 +92,46 @@ function calcTriangle() {
     }
 }
 
-const input = document.getElementById("input-square");
-input.addEventListener("keydown", function onEvent(e) {
+const squareInput = document.getElementById("input-square");
+squareInput.addEventListener("keydown", function onEvent(e) {
     if (e.key == "Enter") {
         calcTriangle();
         return false;
     }
 });
 
-const input2 = document.getElementById("input-triangle");
-input2.addEventListener("keydown", function onEvent(e) {
-    if (e.key == "Enter") {
-        calcTriangle();
-        return false;
-    }
-});
-const input3 = document.getElementById("input-triangle2");
-input3.addEventListener("keydown", function onEvent(e) {
-    if (e.key == "Enter") {
-        calcTriangle();
-        return false;
-    }
-});
-const input4 = document.getElementById("input-triangle3");
-input4.addEventListener("keydown", function onEvent(e) {
-    if (e.key == "Enter") {
-        calcTriangle();
-        return false;
-    }
-});
-const input5 = document.getElementById("input-triangle4");
-input5.addEventListener("keydown", function onEvent(e) {
-    if (e.key == "Enter") {
-        calcTriangle();
-        return false;
-    }
-});
+for (triangleInput of document.getElementsByClassName("triangle-input")) {
+    triangleInput.addEventListener("keydown", function onEvent(e) {
+        if (e.key == "Enter") {
+            calcTriangle();
+            return false;
+        }
+    });
+}
 
-const input6 = document.getElementById("input-circle");
-input6.addEventListener("keydown", function onEvent(e) {
+const circleInput = document.getElementById("input-circle");
+circleInput.addEventListener("keydown", function onEvent(e) {
     if (e.key == "Enter") {
         calcCircle();
         return false;
     }
 });
 
-const button1 = document.getElementById("button1");
-addEventListener('click', function (e) {
-    e.preventDefault();
-})
-const button2 = document.getElementById("button2");
-addEventListener('click', function (e) {
-    e.preventDefault();
-})
-const button3 = document.getElementById("button3");
-addEventListener('click', function (e) {
-    e.preventDefault();
-})
+for (discountInput of document.getElementsByClassName("discount-input")) {
+    discountInput.addEventListener("keydown", function onEvent(e) {
+        if (e.key == "Enter") {
+            calcFinalDiscount();
+            return false;
+        }
+    });
+}
+
+for (button of document.getElementsByClassName("btn")) {
+    addEventListener('click', function (e) {
+        e.preventDefault();
+    })
+}
+
 
 function disallowEnter(e) {
     if (e.key == "Enter") {
@@ -135,6 +143,13 @@ function disallowEnter(e) {
 function disallowEnter2(e) {
     if (e.key == "Enter") {
         calcTriangle();
+        return false;
+    }
+}
+
+function disallowEnter3(e) {
+    if (e.key == "Enter") {
+        calcFinalDiscount();
         return false;
     }
 }

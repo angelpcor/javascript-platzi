@@ -72,6 +72,23 @@
                         id="button3">Calculate!</a>
                 </div>
             </div>
+            <div class="row">
+                <div class="panel panel-default" style="margin-top: 2vh;">
+                    <div class=" panel-heading center big"> Discount Calculator </div>
+                    <div class="panel-body medium center">
+                        Calculate final price of a given price and discount
+                    </div>
+                    <div class="panel-body medium center" id="discount-label">
+                        Final price: 0
+                    </div>
+                    <input type="number" class="discount-input number-input" id="input-discount"
+                        onkeypress="disallowEnter3(event)" style="text-align: center;">
+                    <input type="number" class="discount-input number-input" id="input-discount2"
+                        onkeypress="disallowEnter3(event)" style="text-align: center;">
+                    <a href="#" type="button" class="btn btn-info" style="margin-top: 3vh" onclick="calcFinalDiscount()"
+                        id="button4">Calculate!</a>
+                </div>
+            </div>
         </div>
     </header>
     <script src="./js.js"> </script>
@@ -84,6 +101,9 @@
         document.getElementById("input-triangle4").placeholder = "Height";
 
         document.getElementById("input-circle").placeholder = "Circle Radius";
+
+        document.getElementById("input-discount").placeholder = "Initial Price";
+        document.getElementById("input-discount2").placeholder = "Discount (%)";
     </script>
 </body>
 
